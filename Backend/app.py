@@ -16,12 +16,8 @@ def get_color_palatte():
     image_file = request.files['image']
 
     try:
-        # Save the uploaded image temporarily
-        image_path = "temp_image.jpg"
-        image_file.save(image_path)
-        
         # Generate the color palette and dominant color
-        palette, dominant = generate_color_palette(image_path, k=8)
+        palette, dominant = generate_color_palette(image_file, k=8)
         
         # Format the palette data (RGB, Hex, HSL)
         formatted = format_palette(palette, dominant)

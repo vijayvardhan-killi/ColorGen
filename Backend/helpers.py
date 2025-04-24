@@ -3,15 +3,18 @@ import numpy as np
 from sklearn.cluster import KMeans
 
 # Helper function to generate color palette from an image
-def generate_color_palette(image_path, k=10):
+def generate_color_palette(image_file, k=10):
     # Open the image using Pillow (PIL)
-    image = Image.open(image_path)
+    image = Image.open(image_file)
     
     # Convert the image to RGB (in case it's RGBA or grayscale)
-    image_rgb = image.convert("RGB")
+    image = image.convert("RGB")
+
+    # Resize the image to reduce computation time
+    image = image.resize((150, 150))  
     
     # Convert image to a numpy array (height x width x channels)
-    image_np = np.array(image_rgb)
+    image_np = np.array(image)
     
     # Reshape the image to a 2D array of pixels (height*width, 3)
     pixels = image_np.reshape(-1, 3)
