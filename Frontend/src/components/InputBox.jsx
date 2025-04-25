@@ -15,7 +15,8 @@ const InputBox = ({setImage , setColorPalette}) => {
 
     if (!file) {
       console.error("No file selected");
-      alert("Please select a file to upload.");
+      toast.error("No file selected!");
+      // alert("Please select a file to upload.");
       return;
     }
 
@@ -29,6 +30,7 @@ const InputBox = ({setImage , setColorPalette}) => {
       }
     }catch(error){
       console.error("Error uploading file:", error);
+      toast.error("Error uploading file!");
     }finally{
       setLoading(false);
       toast.success("Image uploaded successfully!");
