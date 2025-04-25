@@ -43,7 +43,7 @@ const InputBox = ({setImage , setColorPalette}) => {
   return (
     <div className='flex flex-col items-center justify-center w-full sm:h-full sm:p-10 p-2 bg-gray-100'>
       <div className='sm:w-[70%] h-[60%] py-20 mt-6 text-center rounded-lg shadow-lg border border-dashed border-black flex flex-col items-center justify-center'>
-        <h1 className='text-3xl break-words mb-4'>Upload a Picture to Generate a Color Picture</h1>
+        <h1 className='text-3xl break-words mb-4'>Upload a Picture to Generate a Color Palette</h1>
         <form onSubmit={handleSubmit} className='flex flex-col items-center'>
           <label htmlFor="Image" className="sr-only">Upload Image</label>
           <input
