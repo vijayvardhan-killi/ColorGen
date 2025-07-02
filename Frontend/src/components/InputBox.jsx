@@ -1,73 +1,73 @@
-import React from 'react';
-import { useState } from 'react';
-import  getData  from '../services/api';
+import React, { useState } from 'react';
+import getData from '../services/api';
 import { toast } from 'react-toastify';
+import { Button } from './ui/button';
+import { Input } from './ui/input';
 
-
-const InputBox = ({setImage , setColorPalette}) => {
-
+const InputBox = ({ setImage, setColorPalette }) => {
+  const [selectedFile, setSelectedFile] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedFile(file);
+      setImage(file);
+    }
+  };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const file = e.target.Image.files[0];
-
-    if (!file) {
-      console.error("No file selected");
+  const handleUpload = async () => {
+    if (!selectedFile) {
       toast.error("No file selected!");
-      // alert("Please select a file to upload.");
       return;
     }
 
     setLoading(true);
-    setImage(file);
-    try{
-      const result = await getData(file);
+    try {
+      const result = await getData(selectedFile);
       if (result) {
         setColorPalette(result);
+        toast.success("Image uploaded successfully!");
         console.log(result);
       }
-    }catch(error){
+    } catch (error) {
       console.error("Error uploading file:", error);
       toast.error("Error uploading file!");
-    }finally{
+    } finally {
       setLoading(false);
-      toast.success("Image uploaded successfully!");
-      
     }
-    
-    
   };
 
   return (
-    <div className='flex flex-col items-center justify-center w-full sm:h-full sm:p-10 p-2 bg-gray-100'>
-      <div className='sm:w-[70%] h-[60%] py-20 mt-6 text-center rounded-lg shadow-lg border border-dashed border-black flex flex-col items-center justify-center'>
-        <h1 className='text-3xl break-words mb-4'>Upload a Picture to Generate a Color Palette</h1>
-        <form onSubmit={handleSubmit} className='flex flex-col items-center'>
-          <label htmlFor="Image" className="sr-only">Upload Image</label>
+    <div className='flex flex-col items-center justify-center w-full sm:h-4/6 h-[60%]  sm:p-10 p-4 '>
+      <div className='flex flex-col sm:w-[70%] h-[50%] sm:h-[60%] py-10 px-4 text-center rounded-lg shadow-lg border border-dashed border-black items-center justify-center'>
+        <h1 className='text-3xl mb-6'>Upload a Picture to Generate a Color Palette</h1>
+        <label className="flex flex-col justify-center items-center w-full h-48 border-2 border-dashed border-gray-400 rounded-lg cursor-pointer hover:bg-gray-100 transition">
           <input
             type="file"
-            name="Image"
-            id="Image"
             accept="image/*"
-            className='block w-full text-sm text-slate-500
-              file:mr-4 file:py-2 file:px-4
-              file:rounded-full file:border-0
-              file:text-sm file:font-semibold
-              file:bg-violet-50 file:text-violet-700
-              hover:file:bg-violet-100'
+            onChange={handleFileChange}
+            className="hidden"
           />
-          <button
-            type="submit"
-            className='mt-4 px-4 py-2 bg-violet-600 text-white rounded-lg hover:bg-violet-700 transition'
-          >
-            Upload
-          </button>
-          {loading && (
-            <div className="m-4 animate-spin p-5 rounded-full h-8 w-8 border-b-2 border-violet-600"></div>
-          )}
-        </form>
+          <span className="text-gray-500">Click or drop an image here</span>
+          <p className="mt-2 text-sm text-gray-600 italic">
+            {selectedFile ? selectedFile.name : "No file selected"}
+          </p>
+        </label>
+        <Button
+          onClick={handleUpload}
+          disabled={loading}
+          className={`mt-6 px-4 py-2    ${
+            loading ? "bg-gray-400 cursor-not-allowed" : ""
+          }`}
+        >
+          {loading ? "Uploading..." : "Upload"}
+        </Button>
+        
+
+        {loading && (
+          <div className="mt-4 animate-spin p-5 rounded-full h-8 w-8 border-b-2 border-violet-600"></div>
+        )}
       </div>
     </div>
   );
