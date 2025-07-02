@@ -1,5 +1,5 @@
 import Home from "./pages/Home"
-import Generate from "./pages/generate";
+import Generate from "./pages/Generate";
 
 import Footer from "./components/Footer";
 import { ToastContainer } from 'react-toastify';
