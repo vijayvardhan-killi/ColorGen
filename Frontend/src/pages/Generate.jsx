@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import InputBox from "../components/InputBox";
-import ColorPalette from "../components/ColorPalette";
-import Navbar from "@/components/Navbar";
-import Footer from "../components/Footer";
+import ColorPalette from "../components/palette/ColorPalette";
 
 const Generate = () => {
   const [image, setImage] = useState(null);
@@ -18,7 +16,6 @@ const Generate = () => {
 
   return (
     <>
-      <Navbar></Navbar>
       <div className="sm:min-h-[90%]  w-full bg-primary-foreground sm:px-4 px-2 py-[6rem] ">
         <h1 className="text-5xl  sm:text-6xl  text-center font-semibold  m-3">
           Color
@@ -39,7 +36,6 @@ const Generate = () => {
           </div>
         )}
       </div>
-      <Footer></Footer>
     </>
   );
 };

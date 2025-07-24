@@ -1,16 +1,11 @@
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/common/Navbar";
 import HeroSection from "@/components/HeroSection";
-import Footer from "@/components/Footer";
-
+import Footer from "@/components/common/Footer";
 
 const Home = () => {
   return (
-    <>
-    <Navbar></Navbar>
-     <HeroSection></HeroSection>
-     <Footer></Footer>
-    </>
-  )
-}
+      <HeroSection/>
+  );
+};
 
-export default Home
+export default Home;

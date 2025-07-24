@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import getData from '../services/api';
 import { toast } from 'react-toastify';
 import { Button } from './ui/button';
-import { Input } from './ui/input';
 
 const InputBox = ({ setImage, setColorPalette }) => {
   const [selectedFile, setSelectedFile] = useState(null);
